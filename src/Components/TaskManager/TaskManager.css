@@ -1,0 +1,24 @@
+ul {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+    text-align: left;
+}
+
+ul p {
+    font-size: 15px;
+}
+
+li {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.taskBox {
+    width: 33%;
+    border: 1px solid grey;
+    border-radius: 7px;
+    padding: 10px;
+}

@@ -1,3 +1,5 @@
+import Header from "../Header/Header";
+import TaskInput from "./TaskInput";
 import TaskItem from "./TaskItem";
 import "./TaskManager.css"
 import { useState } from 'react'
@@ -9,17 +11,19 @@ const TaskManager = () => {
         { id: 3, taskName: "Hacer la compra", priority: false, completed: false }
     ]);
     const [inputValue, setInputValue] = useState("");
+    const [priority, setPriority] = useState(false);
 
     const addTask = () => {
         if (!inputValue.trim()) return
         const newTask = {
             id: Date.now(),
             taskName: inputValue,
-            priority:false,
+            priority:priority,
             completed: false
         }
         setTasks(prev => [...prev, newTask])
         setInputValue("");
+        setPriority(false);
     }
 
     const deleteTask = (taskId) => {
@@ -41,10 +45,14 @@ const TaskManager = () => {
 }
   return (
     <div>
-        <div>
-        <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
-        <button onClick={addTask}>Add task</button>
-        </div>
+       <Header/>
+       <TaskInput 
+       inputValue={inputValue}
+       priority={priority} 
+       setInputValue={setInputValue} 
+       setPriority={setPriority}
+       addTask={addTask}
+       />
        <div>
         <ul>
             {tasks.map((task) => {
@@ -58,7 +66,6 @@ const TaskManager = () => {
         </ul>
        
         </div>
-        
     </div>
   )
 }

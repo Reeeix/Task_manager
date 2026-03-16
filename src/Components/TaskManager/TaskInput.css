@@ -1,0 +1,20 @@
+.divInput {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 15px 12px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 13px;
+  box-shadow: var(--shadow-soft);
+}
+
+.textInput {
+  width: 60%;
+}
+
+.inputSection {
+  display: flex;
+  justify-content: center;
+}

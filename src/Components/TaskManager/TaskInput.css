@@ -1,7 +1,12 @@
+.inputSection {
+  height: 7.5svh;
+}
+
 .divInput {
   width: 80%;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 15px;
   padding: 15px 12px;
   background-color: var(--color-surface);
@@ -12,9 +17,25 @@
 
 .textInput {
   width: 60%;
+  height: 3.5svh;
 }
 
 .inputSection {
   display: flex;
   justify-content: center;
+}
+
+.addButton {
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  margin: 0;
+  inline-size: auto;
+}
+
+select {
+  height: 3.5svh;
 }

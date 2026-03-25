@@ -13,7 +13,7 @@ const TaskInput = ({inputValue, setInputValue, setPriority, priority, addTask, t
           <option value="Medium">Medium</option>
           <option value="High">High</option>
         </select>
-        <p>Task type:</p>
+        <p>Type:</p>
         <select name="typeSelector" id="" value={type} onChange={(e) => {
           setType(e.target.value)
         }}>
@@ -22,7 +22,7 @@ const TaskInput = ({inputValue, setInputValue, setPriority, priority, addTask, t
           <option value="Work">Work</option>
           <option value="Shopping">Shopping</option>
         </select>
-        <button onClick={addTask}>+</button>
+        <button className="addButton" onClick={addTask}>+</button>
         </div>
         </section>
   )

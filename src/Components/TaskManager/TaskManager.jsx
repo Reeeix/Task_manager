@@ -1,17 +1,18 @@
 import Header from "../Header/Header";
+import AdvancedFilters from "./AdvancedFilters";
 import FilterNav from "./FilterNav";
 import TaskCounter from "./TaskCounter";
 import TaskInput from "./TaskInput";
 import TaskItem from "./TaskItem";
+import TaskList from "./TaskList";
 import "./TaskManager.css"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const TaskManager = () => {
-    const [tasks, setTasks] = useState([
-        { id: 1, taskName: "Estudiar", priority: "Medium", type:"Work", completed: false },
-        { id: 2, taskName: "Ir al gimnasio", priority: "High", type:"Personal", completed: false },
-        { id: 3, taskName: "Hacer la compra", priority: "Low", type:"Health", completed: false }
-    ]);
+    const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("tasks");
+    return savedTasks ? JSON.parse(savedTasks) : [];
+    });
     const [inputValue, setInputValue] = useState("");
     const [priority, setPriority] = useState("Low");
     const [type, setType] = useState("Personal");
@@ -20,23 +21,21 @@ const TaskManager = () => {
     const [priorityFilter, setPriorityFilter] = useState("");
     const [typeFilter, setTypeFilter] = useState("");
 
+    useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    }, [tasks]);
+
     const filteredTasks = tasks.filter(task => {
- 
-   if (filter === "completed" && !task.completed) return false;
-   if (filter === "pending" && task.completed) return false;
-   if (priorityFilter !== "" && task.priority !== priorityFilter) {
+        if (filter === "completed" && !task.completed) return false;
+        if (filter === "pending" && task.completed) return false;
+        if (priorityFilter !== "" && task.priority !== priorityFilter) {
+        return false;
+        }
+        if (typeFilter !== "" && task.type !== typeFilter) {
        return false;
-   }
-
-   // filtro por tipo
-   if (typeFilter !== "" && task.type !== typeFilter) {
-       return false;
-   }
-
-   return true;
-
-
-})
+        }
+         return true;
+        })
 
     const addTask = () => {
         if (!inputValue.trim()) return
@@ -72,9 +71,7 @@ const TaskManager = () => {
   return (
     <div>
        <Header/>
-
        <TaskCounter tasks={tasks}/>
-       
        <TaskInput 
        inputValue={inputValue}
        priority={priority} 
@@ -84,30 +81,19 @@ const TaskManager = () => {
        type={type}
        setType={setType}
        />
-       <div className="advancedFilters">
-        <button onClick={() => setShowAdvancedFilters(prev => !prev)}>{showAdvancedFilters ? "▴ Advanced filters" : "▾ Advanced filters"}</button>
-        {showAdvancedFilters && <div>
-        <button className={priorityFilter === "Low" ? "activeAdvFilter" : ""} onClick={() => {setPriorityFilter(prev => prev === "Low" ? "" : "Low");}}>Low</button>
-        <button className={priorityFilter === "Medium" ? "activeAdvFilter" : ""} onClick={() => {setPriorityFilter(prev => prev === "Medium" ? "" : "Medium");}}>Medium</button>
-        <button className={priorityFilter === "High" ? "activeAdvFilter" : ""} onClick={() => {setPriorityFilter(prev => prev === "High" ? "" : "High");}}>High</button>
-        <button className={typeFilter === "Personal" ? "activeAdvFilter" : ""} onClick={() => {setTypeFilter(prev => prev === "Personal" ? "" : "Personal")}}>Personal</button>
-        <button className={typeFilter === "Health" ? "activeAdvFilter" : ""} onClick={() => {setTypeFilter(prev => prev === "Health" ? "" : "Health")}}>Health</button>
-        <button className={typeFilter === "Work" ? "activeAdvFilter" : ""} onClick={() => {setTypeFilter(prev => prev === "Work" ? "" : "Work")}}>Work</button>
-        <button className={typeFilter === "Shopping" ? "activeAdvFilter" : ""} onClick={() => {setTypeFilter(prev => prev === "Shopping" ? "" : "Shopping")}}>Shopping</button>
-        </div>}
-        </div>
+       <AdvancedFilters 
+       setPriorityFilter={setPriorityFilter}
+       setShowAdvancedFilters={setShowAdvancedFilters}
+       setTypeFilter={setTypeFilter}
+       showAdvancedFilters={showAdvancedFilters}
+       typeFilter={typeFilter}
+       priorityFilter={priorityFilter}/>
        <FilterNav setFilter={setFilter} filter={filter}/>
-   
-       <ul>
-           {filteredTasks.map((task) => {
-              return  <TaskItem 
-               key={task.id}
-               task={task}
-               deleteTask={deleteTask}
-               toggleComplete={toggleComplete}
-               />
-           })}
-       </ul>
+       <TaskList 
+       toggleComplete={toggleComplete} 
+       filteredTasks={filteredTasks} 
+       deleteTask={deleteTask}/>
+       
     </div>
   )
 }

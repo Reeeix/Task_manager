@@ -1,16 +1,82 @@
-# React + Vite
+# Task Manager ✅
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean and simple task management app built with React + Vite.
 
-Currently, two official plugins are available:
+Stay organized with priorities, categories, progress tracking, and smart filters. 🚀
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+- Add tasks with:
+	- Title
+	- Priority (Low, Medium, High)
+	- Type (Personal, Health, Work, Shopping)
+- Mark tasks as completed with one click
+- Delete tasks instantly
+- View quick stats: Total, Completed, Pending
+- Filter by status: All, Completed, Pending
+- Use advanced filters by priority and type
+- Persistent storage with localStorage
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🧱 Tech Stack
 
-## Expanding the ESLint configuration
+- React 19
+- Vite 8
+- Plain CSS (component-based styles)
+- ESLint
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📁 Project Structure
+
+```
+src/
+	Components/
+		Header/
+		TaskManager/
+			TaskManager.jsx
+			TaskInput.jsx
+			TaskList.jsx
+			TaskItem.jsx
+			TaskCounter.jsx
+			FilterNav.jsx
+			AdvancedFilters.jsx
+```
+
+## ⚙️ Getting Started
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Run in development mode:
+
+```bash
+npm run dev
+```
+
+3. Build for production:
+
+```bash
+npm run build
+```
+
+4. Preview production build:
+
+```bash
+npm run preview
+```
+
+## 💡 Notes
+
+- Tasks are saved in the browser (localStorage).
+- Data is device/browser specific.
+
+## 🛠️ Next Steps
+
+- Edit existing tasks
+- Sorting by date
+- Eventually: backend integration with user authentication (GitHub / Google)
+
+---
+
+Made with React and focus on clean UX. 🎯

@@ -92,6 +92,30 @@ span.Work {
 }
 
 .badgesAndButtonContainer {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.taskActions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.editRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.editInput {
+  width: 90%;
+  max-width: none;
+}
+
+.saveButton {
+  flex-shrink: 0;
 }

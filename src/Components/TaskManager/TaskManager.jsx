@@ -8,6 +8,20 @@ import TaskList from "./TaskList";
 import "./TaskManager.css"
 import { useState, useEffect } from 'react'
 
+
+/*
+TaskManager es el componente principal.
+
+Responsabilidades:
+- Gestionar el estado de las tareas
+- Añadir, eliminar y completar tareas
+- Aplicar filtros
+- Guardar tareas en localStorage
+
+Flujo:
+TaskManager → TaskList → TaskItem
+*/
+
 const TaskManager = () => {
     const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem("tasks");
@@ -20,11 +34,22 @@ const TaskManager = () => {
     const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
     const [priorityFilter, setPriorityFilter] = useState("");
     const [typeFilter, setTypeFilter] = useState("");
+    const [editingId, setEditingId] = useState("");
+    const [editingValue, setEditingValue] = useState("");
 
+    // Guarda automáticamente las tareas en localStorage
+    // cada vez que cambia el estado tasks
     useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
     }, [tasks]);
 
+
+    // Filtra (excluye) tareas según el estado (all/completed/pending),
+    // la prioridad y el tipo seleccionados.
+    // Si una tarea no cumple algún filtro → return false.
+    // Si no hay motivos para excluirla → return true.
+    // Por eso cuando el filtro es "all" y no hay otros filtros activos,
+    // todas las tareas sobreviven al filtro.
     const filteredTasks = tasks.filter(task => {
         if (filter === "completed" && !task.completed) return false;
         if (filter === "pending" && task.completed) return false;
@@ -37,6 +62,7 @@ const TaskManager = () => {
          return true;
         })
 
+    // Añade una nueva tarea al estado tasks
     const addTask = () => {
         if (!inputValue.trim()) return
         const newTask = {
@@ -50,11 +76,11 @@ const TaskManager = () => {
         setInputValue("");
         setPriority("Low");
     }
-
+    // Elimina la tarea cuyo id coincide con taskId
     const deleteTask = (taskId) => {
         setTasks(prev => prev.filter(({id}) => taskId!==id ))
     }
-
+    // Cambia completed de true a false o viceversa
     const toggleComplete = (id) => {
      setTasks(prev =>
        prev.map(task => {
@@ -68,6 +94,29 @@ const TaskManager = () => {
        })
    )
 }
+    //Función que hace que entremos en modo editar tarea
+    const startEditing = (id, taskName) => {
+        setEditingId(id);           //Recogemos el ID de la tarea a editar
+        setEditingValue(taskName)     //Al principio, el input será igual al nombre que teníamos
+    }
+
+    const stopEditing = () => {
+        setEditingId("");
+        setEditingValue("");
+    }
+    //Función que guarda la tarea editada
+    const handleSave = () => {
+  setTasks(prev =>
+    prev.map(task =>
+      task.id === editingId
+        ? { ...task, taskName: editingValue }
+        : task
+    )
+  );
+
+  stopEditing();
+};
+    //Renderizamos todo
   return (
     <div>
        <Header/>
@@ -92,7 +141,14 @@ const TaskManager = () => {
        <TaskList 
        toggleComplete={toggleComplete} 
        filteredTasks={filteredTasks} 
-       deleteTask={deleteTask}/>
+       deleteTask={deleteTask}
+       startEditing={startEditing}
+       editingId={editingId}
+       setEditingId={setEditingId}
+       editingValue={editingValue}
+       setEditingValue={setEditingValue}
+       handleSave={handleSave}
+       stopEditing={stopEditing}/>
        
     </div>
   )

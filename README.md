@@ -19,8 +19,8 @@ Stay organized with priorities, categories, progress tracking, and smart filters
 
 ## 🧱 Tech Stack
 
-- React 19
-- Vite 8
+- React 19.2.4
+- Vite 8.0.0
 - Plain CSS (component-based styles)
 - ESLint
 
@@ -70,6 +70,12 @@ npm run preview
 
 - Tasks are saved in the browser (localStorage).
 - Data is device/browser specific.
+
+## 🔎 Advanced Filters (Quick Use)
+
+- Click `▾ Advanced filters` to open extra filters.
+- Click a priority or type to apply it.
+- Click the same filter again to remove it.
 
 ## 🛠️ Next Steps
 

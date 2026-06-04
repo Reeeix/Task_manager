@@ -1,6 +1,11 @@
 import TaskItem from './TaskItem'
+/*
+TaskList no recibe todas las tareas (tasks), sino filteredTasks.
 
-const TaskList = ({filteredTasks, deleteTask, toggleComplete}) => {
+TaskManager decide qué tareas sobreviven a los filtros.
+TaskList solo se encarga de recorrerlas con map() y renderizar un TaskItem por cada una.
+*/
+const TaskList = ({filteredTasks, deleteTask, toggleComplete, editingId, setEditingId, startEditing, editingValue, setEditingValue, handleSave, stopEditing}) => {
   return (
    <ul>
            {filteredTasks.map((task) => {
@@ -9,6 +14,13 @@ const TaskList = ({filteredTasks, deleteTask, toggleComplete}) => {
                task={task}
                deleteTask={deleteTask}
                toggleComplete={toggleComplete}
+               editingId={editingId}
+               startEditing={startEditing}
+               editingValue={editingValue}
+               setEditingValue={setEditingValue}
+               handleSave={handleSave}
+               setEditingId={setEditingId}
+               stopEditing={stopEditing}
                />
            })}
        </ul>

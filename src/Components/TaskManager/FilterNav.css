@@ -1,24 +1,92 @@
 nav {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+}
+
+/* ── Top row: search + filters toggle ── */
+.filter-top-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+}
+
+.search-box {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    width: 100%;
+    padding-right: 2rem;
+    box-sizing: border-box;
+}
+
+.search-icon {
+    position: absolute;
+    right: 8px;
+    pointer-events: none;
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+.adv-toggle {
+    white-space: nowrap;
+    background-color: white;
+    box-shadow: none;
+    border-radius: 4px;
+}
+
+.adv-toggle--active {
+    color: var(--color-text-focus);
+    border-bottom: 2px solid var(--color-text-focus);
+}
+
+/* ── Advanced filters panel ── */
+.advanced-filters-panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 6px 0;
+}
+
+.advanced-filters-panel button {
+    background-color: white;
+    box-shadow: none;
+    border-radius: 4px;
+}
+
+.activeAdvFilter {
+    border-bottom: 2px solid var(--color-text-focus);
+    color: var(--color-text-focus);
+}
+
+/* ── Tab row: All / Completed / Pending ── */
+.filter-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     height: 7svh;
-    
+    border-top: 1px solid #e5e7eb;
 }
 
-nav > button {
- width: 100%;
- background-color: white;
- border-radius: 0px;
- transition: ease-in;
- box-shadow: none;
+.filter-tabs button {
+    width: 100%;
+    background-color: white;
+    border-radius: 0;
+    border: none;
+    border-bottom: 2px solid transparent;
+    box-shadow: none;
+    transition: color 0.15s ease-in, border-color 0.15s ease-in;
 }
 
-nav > button:focus,
-nav > button:focus-visible {
+.filter-tabs button:focus,
+.filter-tabs button:focus-visible {
     box-shadow: none;
 }
 
-nav > button.active {
+.filter-tabs button.active {
     border-bottom: 2px solid var(--color-text-focus);
     color: var(--color-text-focus);
 }

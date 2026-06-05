@@ -1,5 +1,4 @@
 import Header from "../Header/Header";
-import AdvancedFilters from "./AdvancedFilters";
 import FilterNav from "./FilterNav";
 import TaskCounter from "./TaskCounter";
 import TaskInput from "./TaskInput";
@@ -36,6 +35,7 @@ const TaskManager = () => {
     const [typeFilter, setTypeFilter] = useState("");
     const [editingId, setEditingId] = useState("");
     const [editingValue, setEditingValue] = useState("");
+    const [searchValue, setSearchValue] = useState("");
 
     // Guarda automáticamente las tareas en localStorage
     // cada vez que cambia el estado tasks
@@ -51,14 +51,11 @@ const TaskManager = () => {
     // Por eso cuando el filtro es "all" y no hay otros filtros activos,
     // todas las tareas sobreviven al filtro.
     const filteredTasks = tasks.filter(task => {
-        if (filter === "completed" && !task.completed) return false;
-        if (filter === "pending" && task.completed) return false;
-        if (priorityFilter !== "" && task.priority !== priorityFilter) {
-        return false;
-        }
-        if (typeFilter !== "" && task.type !== typeFilter) {
-       return false;
-        }
+        if (filter === "completed" && !task.completed) {return false};
+        if (filter === "pending" && task.completed) {return false};
+        if (priorityFilter !== "" && task.priority !== priorityFilter) {return false};
+        if (typeFilter !== "" && task.type !== typeFilter) {return false};
+        if (searchValue !== "" && !task.taskName.toLowerCase().includes(searchValue.toLowerCase())) {return false}
          return true;
         })
 
@@ -118,7 +115,7 @@ const TaskManager = () => {
 };
     //Renderizamos todo
   return (
-    <div>
+    <div className="task-manager-body">
        <Header/>
        <TaskCounter tasks={tasks}/>
        <TaskInput 
@@ -130,14 +127,17 @@ const TaskManager = () => {
        type={type}
        setType={setType}
        />
-       <AdvancedFilters 
-       setPriorityFilter={setPriorityFilter}
-       setShowAdvancedFilters={setShowAdvancedFilters}
-       setTypeFilter={setTypeFilter}
-       showAdvancedFilters={showAdvancedFilters}
+       <FilterNav
+       setFilter={setFilter}
+       filter={filter}
+       searchValue={searchValue}
+       setSearchValue={setSearchValue}
+       priorityFilter={priorityFilter}
        typeFilter={typeFilter}
-       priorityFilter={priorityFilter}/>
-       <FilterNav setFilter={setFilter} filter={filter}/>
+       showAdvancedFilters={showAdvancedFilters}
+       setShowAdvancedFilters={setShowAdvancedFilters}
+       setPriorityFilter={setPriorityFilter}
+       setTypeFilter={setTypeFilter}/>
        <TaskList 
        toggleComplete={toggleComplete} 
        filteredTasks={filteredTasks} 

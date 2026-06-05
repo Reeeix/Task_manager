@@ -1,3 +1,7 @@
+.task-manager-body {
+  padding: 0 5%;
+}
+
 ul {
   display: flex;
   flex-direction: column;
@@ -8,8 +12,4 @@ ul {
 
 ul p {
   font-size: 15px;
-}
-
-.activeAdvFilter {
-  border-bottom: 2px solid var(--color-text-focus);
 }

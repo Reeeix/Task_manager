@@ -36,6 +36,7 @@ const TaskManager = () => {
     const [editingId, setEditingId] = useState("");
     const [editingValue, setEditingValue] = useState("");
     const [searchValue, setSearchValue] = useState("");
+    const [sortOrder, setSortOrder] = useState("newestFirst");
 
     // Guarda automáticamente las tareas en localStorage
     // cada vez que cambia el estado tasks
@@ -58,6 +59,14 @@ const TaskManager = () => {
         if (searchValue !== "" && !task.taskName.toLowerCase().includes(searchValue.toLowerCase())) {return false}
          return true;
         })
+    
+    const sortedTasks = filteredTasks.sort((a,b) => {
+        if (sortOrder === "newestFirst") {
+           return b.id - a.id
+        } else if (sortOrder === "oldestFirst") {
+            return a.id - b.id
+        }
+    })
 
     // Añade una nueva tarea al estado tasks
     const addTask = () => {
@@ -129,6 +138,8 @@ const TaskManager = () => {
        />
        <FilterNav
        setFilter={setFilter}
+       setSortOrder={setSortOrder}
+       sortOrder={sortOrder}
        filter={filter}
        searchValue={searchValue}
        setSearchValue={setSearchValue}
@@ -140,7 +151,7 @@ const TaskManager = () => {
        setTypeFilter={setTypeFilter}/>
        <TaskList 
        toggleComplete={toggleComplete} 
-       filteredTasks={filteredTasks} 
+       sortedTasks={sortedTasks}
        deleteTask={deleteTask}
        startEditing={startEditing}
        editingId={editingId}

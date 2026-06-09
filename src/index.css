@@ -162,3 +162,14 @@ button:focus {
   }
 }
 
+@media (max-width: 420px) {
+  #root {
+    padding: 20px 14px 28px;
+  }
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 6px;
+  }
+}
+

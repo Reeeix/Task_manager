@@ -5,7 +5,7 @@ const FilterNav = ({
   searchValue, setSearchValue,
   priorityFilter, typeFilter,
   showAdvancedFilters, setShowAdvancedFilters,
-  setPriorityFilter, setTypeFilter
+  setPriorityFilter, setTypeFilter, setSortOrder, sortOrder
 }) => {
   const toggleFilter = (value, setter) => {
     setter(prev => (prev === value ? "" : value));
@@ -28,6 +28,12 @@ const FilterNav = ({
           onClick={() => setShowAdvancedFilters(prev => !prev)}
         >
           {showAdvancedFilters ? "▴ Filters" : "▾ Filters"}
+        </button>
+        <button
+          className="sort-toggle"
+          onClick={() => setSortOrder(prev => prev === "newestFirst" ? "oldestFirst" : "newestFirst")}
+        >
+          {sortOrder === "newestFirst" ? "↑ Oldest first" : "↓ Newest first"}
         </button>
       </div>
 

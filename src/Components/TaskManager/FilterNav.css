@@ -7,12 +7,13 @@ nav {
 .filter-top-row {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 8px;
     padding: 8px 0;
 }
 
 .search-box {
-    flex: 1;
+    flex: 1 1 220px;
     position: relative;
     display: flex;
     align-items: center;
@@ -44,22 +45,47 @@ nav {
     border-bottom: 2px solid var(--color-text-focus);
 }
 
+.sort-toggle {
+    white-space: nowrap;
+    background-color: white;
+    box-shadow: none;
+    border-radius: 4px;
+    color: var(--color-text-focus);
+    border: 1px solid var(--color-text-focus);
+    font-size: 0.8rem;
+    padding: 4px 8px;
+}
+
 /* ── Advanced filters panel ── */
 .advanced-filters-panel {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    padding: 6px 0;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0 14px;
 }
 
 .advanced-filters-panel button {
-    background-color: white;
-    box-shadow: none;
-    border-radius: 4px;
+    background: var(--color-surface);
+    border: none;
+    border-radius: 999px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+    color: #525252;
+    font-size: 0.88rem;
+    font-weight: 400;
+    padding: 6px 12px;
+    transition: transform 0.16s ease, box-shadow 0.16s ease, color 0.16s ease, background-color 0.16s ease;
+}
+
+.advanced-filters-panel button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
 }
 
 .activeAdvFilter {
-    border-bottom: 2px solid var(--color-text-focus);
+    background-color: #f3e8ff;
+    box-shadow: 0 8px 18px rgba(147, 51, 234, 0.22);
     color: var(--color-text-focus);
 }
 
@@ -67,7 +93,7 @@ nav {
 .filter-tabs {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    height: 7svh;
+    height: 6.5svh;
     border-top: 1px solid #e5e7eb;
 }
 
@@ -89,4 +115,32 @@ nav {
 .filter-tabs button.active {
     border-bottom: 2px solid var(--color-text-focus);
     color: var(--color-text-focus);
+}
+
+@media (max-width: 640px) {
+    .filter-top-row {
+        gap: 6px;
+        padding: 6px 0;
+    }
+
+    .search-box {
+        flex-basis: 100%;
+        min-width: 0;
+    }
+
+    .adv-toggle,
+    .sort-toggle {
+        font-size: 0.75rem;
+        padding: 4px 6px;
+    }
+
+    .advanced-filters-panel {
+        gap: 8px;
+        padding: 8px 0 10px;
+    }
+
+    .advanced-filters-panel button {
+        padding: 5px 10px;
+        font-size: 0.82rem;
+    }
 }

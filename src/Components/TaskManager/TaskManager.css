@@ -13,3 +13,12 @@ ul {
 ul p {
   font-size: 15px;
 }
+
+.no-tasks-title {
+  margin-top: 44px;
+  margin-bottom: 8px;
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #9ca3af;
+}

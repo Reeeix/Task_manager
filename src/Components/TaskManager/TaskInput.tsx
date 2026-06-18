@@ -1,13 +1,15 @@
 import "./TaskInput.css"
+import { TaskInputProps } from "../../types"
 
-const TaskInput = ({inputValue, setInputValue, setPriority, priority, addTask, type, setType}) => {
+
+const TaskInput = ({inputValue, setInputValue, setPriority, priority, addTask, type, setType}: TaskInputProps) => {
   return (
         <section className="inputSection">
         <div className="divInput">
         <input className="textInput" type="text" value={inputValue} placeholder="Wash the dishes" onChange={(e) => setInputValue(e.target.value)}/>
         <p>Priority:</p> 
         <select name="prioritySelector" id="" onChange={(e) => {
-          setPriority(e.target.value);
+          setPriority(e.target.value as "Low" | "Medium" | "High");
         }} value={priority}>
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
@@ -15,7 +17,7 @@ const TaskInput = ({inputValue, setInputValue, setPriority, priority, addTask, t
         </select>
         <p>Type:</p>
         <select name="typeSelector" id="" value={type} onChange={(e) => {
-          setType(e.target.value)
+          setType(e.target.value as "Personal" | "Health" | "Work" | "Shopping")
         }}>
           <option value="Personal">Personal</option>
           <option value="Health">Health</option>

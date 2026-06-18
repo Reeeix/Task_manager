@@ -1,6 +1,9 @@
 import "./TaskCounter.css"
+import { Task } from "../../types";
+import { TaskCounterProps } from "../../types";
 
-const TaskCounter = ({tasks}) => {
+
+const TaskCounter = ({tasks}: TaskCounterProps) => {
    const totalTasks = tasks.length;
    const completedTasks = tasks.filter(task => task.completed).length;
    const pendingTasks = totalTasks - completedTasks;

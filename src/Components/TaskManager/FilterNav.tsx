@@ -1,4 +1,7 @@
 import "./FilterNav.css"
+import React from "react";
+import { FilterNavProps } from "../../types";
+
 
 const FilterNav = ({
   setFilter, filter,
@@ -6,10 +9,7 @@ const FilterNav = ({
   priorityFilter, typeFilter,
   showAdvancedFilters, setShowAdvancedFilters,
   setPriorityFilter, setTypeFilter, setSortOrder, sortOrder
-}) => {
-  const toggleFilter = (value, setter) => {
-    setter(prev => (prev === value ? "" : value));
-  }
+} : FilterNavProps) => {
 
   return (
     <nav>
@@ -39,13 +39,13 @@ const FilterNav = ({
 
       {showAdvancedFilters && (
         <div className="advanced-filters-panel">
-          <button className={priorityFilter === "Low"      ? "activeAdvFilter" : ""} onClick={() => toggleFilter("Low",      setPriorityFilter)}>Low</button>
-          <button className={priorityFilter === "Medium"   ? "activeAdvFilter" : ""} onClick={() => toggleFilter("Medium",   setPriorityFilter)}>Medium</button>
-          <button className={priorityFilter === "High"     ? "activeAdvFilter" : ""} onClick={() => toggleFilter("High",     setPriorityFilter)}>High</button>
-          <button className={typeFilter === "Personal"     ? "activeAdvFilter" : ""} onClick={() => toggleFilter("Personal", setTypeFilter)}>Personal</button>
-          <button className={typeFilter === "Health"       ? "activeAdvFilter" : ""} onClick={() => toggleFilter("Health",   setTypeFilter)}>Health</button>
-          <button className={typeFilter === "Work"         ? "activeAdvFilter" : ""} onClick={() => toggleFilter("Work",     setTypeFilter)}>Work</button>
-          <button className={typeFilter === "Shopping"     ? "activeAdvFilter" : ""} onClick={() => toggleFilter("Shopping", setTypeFilter)}>Shopping</button>
+          <button className={priorityFilter === "Low"      ? "activeAdvFilter" : ""} onClick={() => setPriorityFilter(prev => prev === "Low" ? "" : "Low")}>Low</button>
+          <button className={priorityFilter === "Medium"   ? "activeAdvFilter" : ""} onClick={() => setPriorityFilter(prev => prev === "Medium" ? "" : "Medium")}>Medium</button>
+          <button className={priorityFilter === "High"     ? "activeAdvFilter" : ""} onClick={() => setPriorityFilter(prev => prev === "High" ? "" : "High")}>High</button>
+          <button className={typeFilter === "Personal"     ? "activeAdvFilter" : ""} onClick={() => setTypeFilter(prev => prev === "Personal" ? "" : "Personal")}>Personal</button>
+          <button className={typeFilter === "Health"       ? "activeAdvFilter" : ""} onClick={() => setTypeFilter(prev => prev === "Health" ? "" : "Health")}>Health</button>
+          <button className={typeFilter === "Work"         ? "activeAdvFilter" : ""} onClick={() => setTypeFilter(prev => prev === "Work" ? "" : "Work")}>Work</button>
+          <button className={typeFilter === "Shopping"     ? "activeAdvFilter" : ""} onClick={() => setTypeFilter(prev => prev === "Shopping" ? "" : "Shopping")}>Shopping</button>
         </div>
       )}
 
